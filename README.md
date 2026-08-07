@@ -34,7 +34,7 @@ Architecture: The tool is entirely contained within a single HTML file. No build
 
 # How to Use
 
-Download the profit_calculator.html file.
+Download the interactive_profit_calculator.html file from this repository.
 
 Open the file directly in any modern web browser (Chrome, Safari, Firefox, Edge).
 
