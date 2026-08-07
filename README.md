@@ -1,6 +1,7 @@
 # E-Commerce-Profitability-Calculator-Haider-s-Tailored
 
 An interactive, web-based financial modeling tool designed to help e-commerce apparel brands translate static sales data into dynamic, actionable business strategies.
+**[🔗 Try the live calculator here](https://namoos99.github.io/E-Commerce-Profitability-Calculator-Haider-s-Tailored/interactive_profit_calculator.html)**
 
 # The Problem
 
