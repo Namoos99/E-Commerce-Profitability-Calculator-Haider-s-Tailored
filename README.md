@@ -1,6 +1,6 @@
-# E-Commerce Profitability Calculator — Haider's Tailoring
+# E-Commerce Profitability Calculator — Haider's Tailored
 
-An interactive, web-based financial modeling tool built for **Haider's Tailoring**, a real apparel business, to translate their static sales spreadsheet into dynamic, actionable strategy.
+An interactive, web-based financial modeling tool built for **Haider's Tailored**, a real apparel business, to translate their static sales spreadsheet into dynamic, actionable strategy.
 
 🔗 **[Try the live calculator](https://namoos99.github.io/E-Commerce-Profitability-Calculator-Haider-s-Tailored/interactive_profit_calculator.html)**
 
