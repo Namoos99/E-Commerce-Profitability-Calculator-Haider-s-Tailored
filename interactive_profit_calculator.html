@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haider's Tailored - Y2K Pop Profit Matrix</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Using Fredoka One for that bubbly, chunky Y2K logotype feel and Montserrat for clean sans-serif -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        bubbly: ['"Fredoka One"', 'cursive'],
+                    },
+                    colors: {
+                        tokyo: {
+                            blue: '#0047FF', // Intense, saturated electric blue from the image
+                            white: '#FFFFFF',
+                            bg: '#F8F9FA'
+                        }
+                    },
+                    boxShadow: {
+                        /* Hard, flat shadows typical of this specific Y2K graphic style */
+                        'hard-blue': '4px 4px 0px 0px #0047FF',
+                        'hard-blue-lg': '8px 8px 0px 0px #0047FF',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #0047FF;
+            /* Subtle grid to keep it techy but clean */
+            background-image: linear-gradient(#f0f0f0 2px, transparent 2px), linear-gradient(90deg, #f0f0f0 2px, transparent 2px);
+            background-size: 50px 50px;
+        }
+
+        /* The signature heavy outline and flat fill look */
+        .y2k-panel {
+            background-color: #ffffff;
+            border: 4px solid #0047FF;
+            border-radius: 20px;
+            box-shadow: 8px 8px 0px 0px #0047FF;
+            position: relative;
+        }
+
+        /* Geometric decorative bits mimicking the image */
+        .tech-shape-1 {
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+            background-color: #0047FF;
+        }
+        
+        .tech-shape-2 {
+            border: 4px solid #0047FF;
+            border-radius: 10px;
+        }
+
+        /* Bubbly text outline effect */
+        .text-outline {
+            color: #0047FF;
+            -webkit-text-stroke: 2px #0047FF;
+            paint-order: stroke fill;
+        }
+        .text-white-outline {
+            color: white;
+            -webkit-text-stroke: 4px #0047FF;
+            paint-order: stroke fill;
+            text-shadow: 4px 4px 0px #0047FF;
+        }
+
+        /* Custom Sliders - Big, chunky, and blue */
+        input[type=range] {
+            -webkit-appearance: none; 
+            width: 100%; 
+            background: transparent; 
+            margin: 15px 0;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 28px;
+            width: 28px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 4px solid #0047FF;
+            cursor: pointer;
+            margin-top: -10px; 
+            box-shadow: 2px 2px 0px 0px #0047FF;
+            transition: transform 0.1s;
+        }
+        
+        input[type=range]::-webkit-slider-thumb:active {
+            transform: scale(0.9);
+            box-shadow: 0px 0px 0px 0px #0047FF;
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 12px;
+            cursor: pointer;
+            background: #ffffff;
+            border: 3px solid #0047FF;
+            border-radius: 10px;
+        }
+
+        /* Y2K Toggle Switch - pill shaped, heavy borders */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #0047FF;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #0047FF;
+        }
+        .toggle-label {
+            background-color: #ffffff;
+            border: 4px solid #0047FF;
+            border-radius: 30px;
+        }
+        .toggle-checkbox {
+            background: #ffffff;
+            border: 4px solid #0047FF;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        .toggle-checkbox:checked {
+            left: calc(100% - 26px);
+            background: #ffffff;
+        }
+
+        .value-transition {
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8 flex items-center justify-center">
+
+    <div class="max-w-6xl w-full mx-auto flex flex-col lg:flex-row gap-8 relative">
+        
+        <!-- Background decorative elements based on the image -->
+        <div class="hidden lg:block absolute -top-10 -left-10 w-48 h-8 tech-shape-1 z-0"></div>
+        <div class="hidden lg:block absolute top-10 -right-20 w-32 h-6 tech-shape-1 z-0"></div>
+        <div class="hidden lg:block absolute bottom-0 -left-16 w-40 h-10 tech-shape-2 z-0"></div>
+
+        <!-- Left Column: Controls (Strategies) -->
+        <div class="w-full lg:w-7/12 flex flex-col gap-8 z-10">
+            
+            <header class="y2k-panel p-8 text-center relative overflow-hidden">
+                <!-- Three hearts motif from the image -->
+                <div class="absolute top-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+                    <svg class="w-8 h-8 text-tokyo-blue" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path></svg>
+                    <svg class="w-8 h-8 text-tokyo-blue" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path></svg>
+                    <svg class="w-8 h-8 text-tokyo-blue" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path></svg>
+                </div>
+                
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bubbly text-white-outline tracking-wider mt-6 mb-2 uppercase">
+                    HAIDER'S TAILORED
+                </h1>
+                <div class="inline-block bg-tokyo-blue text-white font-sans font-black italic px-6 py-1 rounded-full text-xl border-4 border-tokyo-blue shadow-hard-blue">
+                    PROFIT
+                </div>
+            </header>
+
+            <div class="space-y-6">
+                <!-- Strategy 1 -->
+                <div class="y2k-panel p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <div>
+                            <h3 class="font-sans font-black text-2xl uppercase tracking-tighter text-tokyo-blue">01. Premium Price</h3>
+                            <p class="text-sm font-bold mt-1">Markup Hero Items</p>
+                        </div>
+                        <div class="relative inline-block w-14 h-8 align-middle select-none">
+                            <input type="checkbox" name="toggle1" id="toggle1" class="toggle-checkbox absolute block w-6 h-6 appearance-none cursor-pointer z-10" checked/>
+                            <label for="toggle1" class="toggle-label block overflow-hidden h-8 cursor-pointer"></label>
+                        </div>
+                    </div>
+                    
+                    <div id="controls1" class="space-y-2 mt-4">
+                        <div class="flex justify-between items-baseline">
+                            <label for="priceIncrease" class="text-xs font-black uppercase tracking-wider">Markup %</label>
+                            <span id="priceIncreaseVal" class="text-3xl font-bubbly text-tokyo-blue">5%</span>
+                        </div>
+                        <input type="range" id="priceIncrease" min="0" max="15" value="5">
+                    </div>
+                </div>
+
+                <!-- Strategy 2 -->
+                <div class="y2k-panel p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <div>
+                            <h3 class="font-sans font-black text-2xl uppercase tracking-tighter text-tokyo-blue">02. Fix Fits</h3>
+                            <p class="text-sm font-bold mt-1">Reduce Returns</p>
+                        </div>
+                        <div class="relative inline-block w-14 h-8 align-middle select-none">
+                            <input type="checkbox" name="toggle2" id="toggle2" class="toggle-checkbox absolute block w-6 h-6 appearance-none cursor-pointer z-10" checked/>
+                            <label for="toggle2" class="toggle-label block overflow-hidden h-8 cursor-pointer"></label>
+                        </div>
+                    </div>
+                    
+                    <div id="controls2" class="space-y-2 mt-4">
+                         <div class="flex justify-between items-baseline">
+                            <label for="returnReduction" class="text-xs font-black uppercase tracking-wider">Return Drop</label>
+                            <span id="returnReductionVal" class="text-3xl font-bubbly text-tokyo-blue">-2.0%</span>
+                        </div>
+                        <input type="range" id="returnReduction" min="0" max="5" step="0.5" value="2.0">
+                    </div>
+                </div>
+
+                <!-- Strategy 3 -->
+                <div class="y2k-panel p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <div>
+                            <h3 class="font-sans font-black text-2xl uppercase tracking-tighter text-tokyo-blue">03. Bundles</h3>
+                            <p class="text-sm font-bold mt-1">Push 2-Packs</p>
+                        </div>
+                        <div class="relative inline-block w-14 h-8 align-middle select-none">
+                            <input type="checkbox" name="toggle3" id="toggle3" class="toggle-checkbox absolute block w-6 h-6 appearance-none cursor-pointer z-10" checked/>
+                            <label for="toggle3" class="toggle-label block overflow-hidden h-8 cursor-pointer"></label>
+                        </div>
+                    </div>
+                    
+                    <div id="controls3" class="space-y-2 mt-4">
+                         <div class="flex justify-between items-baseline">
+                            <label for="bundleShift" class="text-xs font-black uppercase tracking-wider">Conversion</label>
+                            <span id="bundleShiftVal" class="text-3xl font-bubbly text-tokyo-blue">10%</span>
+                        </div>
+                        <input type="range" id="bundleShift" min="0" max="30" value="10">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Results Dashboard -->
+        <div class="w-full lg:w-5/12 z-10">
+            <div class="y2k-panel p-8 h-full flex flex-col sticky top-8 bg-tokyo-blue text-white border-white">
+                
+                <!-- Star motifs from the image -->
+                <div class="absolute bottom-4 right-4 flex gap-2">
+                     <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/></svg>
+                     <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/></svg>
+                </div>
+
+                <div class="flex-grow">
+                    <div class="mb-10 p-4 bg-white text-tokyo-blue rounded-xl border-4 border-tokyo-blue">
+                        <p class="text-xs font-black uppercase tracking-wider mb-1">Baseline Profit</p>
+                        <div class="text-3xl font-bubbly">$<span id="baselineProfitDisplay">245,000</span></div>
+                    </div>
+
+                    <div class="mb-8 text-center">
+                        <p class="text-sm font-black uppercase tracking-widest mb-4">NEW PROJECTED YIELD</p>
+                        <!-- Main Output Number -->
+                        <div class="text-5xl lg:text-7xl font-bubbly value-transition">
+                            $<span id="newProfitDisplay">--</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6 mt-12 pt-8 border-t-4 border-white/30">
+                        <div class="bg-white text-tokyo-blue p-4 rounded-xl border-4 border-tokyo-blue">
+                            <p class="text-xs font-black uppercase tracking-wider mb-2">Total Increase</p>
+                            <div class="flex items-end gap-3 justify-between">
+                                <div id="marginContainer" class="text-4xl font-bubbly value-transition">
+                                    +$<span id="profitIncreaseDisplay">--</span>
+                                </div>
+                                <span class="text-xl font-black bg-tokyo-blue text-white px-3 py-1 rounded-lg border-2 border-tokyo-blue value-transition">
+                                    +<span id="percentIncreaseDisplay">--</span>%
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="resetBtn" class="w-full mt-8 bg-white text-tokyo-blue hover:bg-gray-100 border-4 border-tokyo-blue py-4 rounded-xl font-sans font-black text-xl uppercase tracking-wider shadow-hard-blue transition-transform active:translate-y-1 active:shadow-none">
+                    RESET PARAMETERS
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Mock Baseline Data ---
+        const BASE_METRICS = {
+            annualOrders: 15000,
+            avgOrderValue: 65.00,
+            avgCOGS: 25.00,       
+            avgFulfillmentCost: 12.00, 
+            avgMarketingCAC: 15.00,    
+            returnRate: 0.18,     
+            returnCostPerItem: 18.00, 
+            heroRevenueRatio: 0.40,
+        };
+
+        // DOM Elements
+        const toggle1 = document.getElementById('toggle1');
+        const priceIncreaseInput = document.getElementById('priceIncrease');
+        const priceIncreaseVal = document.getElementById('priceIncreaseVal');
+        const controls1 = document.getElementById('controls1');
+
+        const toggle2 = document.getElementById('toggle2');
+        const returnReductionInput = document.getElementById('returnReduction');
+        const returnReductionVal = document.getElementById('returnReductionVal');
+        const controls2 = document.getElementById('controls2');
+
+        const toggle3 = document.getElementById('toggle3');
+        const bundleShiftInput = document.getElementById('bundleShift');
+        const bundleShiftVal = document.getElementById('bundleShiftVal');
+        const controls3 = document.getElementById('controls3');
+
+        const baselineProfitDisplay = document.getElementById('baselineProfitDisplay');
+        const newProfitDisplay = document.getElementById('newProfitDisplay');
+        const profitIncreaseDisplay = document.getElementById('profitIncreaseDisplay');
+        const percentIncreaseDisplay = document.getElementById('percentIncreaseDisplay');
+        const resetBtn = document.getElementById('resetBtn');
+
+        const formatCurrency = (num) => {
+            return Math.round(num).toLocaleString('en-US');
+        };
+
+        function calculateBaselineProfit() {
+            const grossRevenue = BASE_METRICS.annualOrders * BASE_METRICS.avgOrderValue;
+            const totalCOGS = BASE_METRICS.annualOrders * BASE_METRICS.avgCOGS;
+            const totalFulfillment = BASE_METRICS.annualOrders * BASE_METRICS.avgFulfillmentCost;
+            const totalMarketing = BASE_METRICS.annualOrders * BASE_METRICS.avgMarketingCAC;
+            const totalReturns = BASE_METRICS.annualOrders * BASE_METRICS.returnRate;
+            const totalReturnCosts = totalReturns * BASE_METRICS.returnCostPerItem;
+
+            return grossRevenue - totalCOGS - totalFulfillment - totalMarketing - totalReturnCosts;
+        }
+
+        const baselineProfit = calculateBaselineProfit();
+        baselineProfitDisplay.innerText = formatCurrency(baselineProfit);
+
+        function calculateProjectedProfit() {
+            let currentOrders = BASE_METRICS.annualOrders;
+            let projectedRevenue = currentOrders * BASE_METRICS.avgOrderValue;
+            let projectedCOGS = currentOrders * BASE_METRICS.avgCOGS;
+            let projectedFulfillment = currentOrders * BASE_METRICS.avgFulfillmentCost;
+            let projectedMarketing = currentOrders * BASE_METRICS.avgMarketingCAC;
+            let currentReturnRate = BASE_METRICS.returnRate;
+
+            if (toggle1.checked) {
+                const increasePercent = parseFloat(priceIncreaseInput.value) / 100;
+                const heroRevenue = projectedRevenue * BASE_METRICS.heroRevenueRatio;
+                projectedRevenue += (heroRevenue * increasePercent);
+            }
+
+            if (toggle3.checked) {
+                const shiftPercent = parseFloat(bundleShiftInput.value) / 100;
+                const bundledOrdersCount = currentOrders * shiftPercent;
+                const standardOrdersCount = currentOrders - bundledOrdersCount;
+
+                const bundleRevenuePerOrder = (BASE_METRICS.avgOrderValue * 2) * 0.90; 
+                const bundleCOGSPerOrder = BASE_METRICS.avgCOGS * 2;
+                const bundleFulfillmentPerOrder = BASE_METRICS.avgFulfillmentCost * 1.3; 
+
+                const standardRevenue = standardOrdersCount * BASE_METRICS.avgOrderValue;
+                const bundleRevenue = bundledOrdersCount * bundleRevenuePerOrder;
+                projectedRevenue = standardRevenue + bundleRevenue; 
+
+                 if (toggle1.checked) {
+                    const increasePercent = parseFloat(priceIncreaseInput.value) / 100;
+                    projectedRevenue += (projectedRevenue * BASE_METRICS.heroRevenueRatio * increasePercent);
+                }
+
+                projectedCOGS = (standardOrdersCount * BASE_METRICS.avgCOGS) + (bundledOrdersCount * bundleCOGSPerOrder);
+                projectedFulfillment = (standardOrdersCount * BASE_METRICS.avgFulfillmentCost) + (bundledOrdersCount * bundleFulfillmentPerOrder);
+                projectedMarketing = currentOrders * BASE_METRICS.avgMarketingCAC;
+            }
+
+            if (toggle2.checked) {
+                const reductionPercent = parseFloat(returnReductionInput.value) / 100;
+                currentReturnRate = Math.max(0, currentReturnRate - reductionPercent);
+            }
+
+            const projectedReturnsCount = currentOrders * currentReturnRate;
+            const projectedReturnCosts = projectedReturnsCount * BASE_METRICS.returnCostPerItem;
+            const projectedProfit = projectedRevenue - projectedCOGS - projectedFulfillment - projectedMarketing - projectedReturnCosts;
+
+            updateUI(projectedProfit);
+        }
+
+        function updateUI(projectedProfit) {
+            newProfitDisplay.innerText = formatCurrency(projectedProfit);
+            
+            const difference = projectedProfit - baselineProfit;
+            const diffFormatted = formatCurrency(difference);
+            
+            const marginContainer = document.getElementById('marginContainer');
+
+            // Simplified logic for this specific aesthetic (mostly just showing the number)
+            if (difference >= 0) {
+                profitIncreaseDisplay.innerText = diffFormatted;
+            } else {
+                profitIncreaseDisplay.innerText = diffFormatted.replace('-', '');
+                // Note: Not adding red colors here to stick strictly to the blue/white theme requested
+            }
+
+            const percentChange = ((projectedProfit - baselineProfit) / Math.abs(baselineProfit)) * 100;
+            percentIncreaseDisplay.innerText = percentChange.toFixed(1);
+        }
+
+        // Event Listeners
+        priceIncreaseInput.addEventListener('input', (e) => {
+            priceIncreaseVal.innerText = `${e.target.value}%`;
+            calculateProjectedProfit();
+        });
+
+        returnReductionInput.addEventListener('input', (e) => {
+            returnReductionVal.innerText = `-${e.target.value}%`;
+            calculateProjectedProfit();
+        });
+
+        bundleShiftInput.addEventListener('input', (e) => {
+            bundleShiftVal.innerText = `${e.target.value}%`;
+            calculateProjectedProfit();
+        });
+
+        const toggleState = (el, controls) => {
+            controls.style.opacity = el.checked ? '1' : '0.3';
+            controls.style.pointerEvents = el.checked ? 'auto' : 'none';
+            calculateProjectedProfit();
+        };
+
+        toggle1.addEventListener('change', (e) => toggleState(e.target, controls1));
+        toggle2.addEventListener('change', (e) => toggleState(e.target, controls2));
+        toggle3.addEventListener('change', (e) => toggleState(e.target, controls3));
+
+        resetBtn.addEventListener('click', () => {
+            toggle1.checked = true;
+            toggle2.checked = true;
+            toggle3.checked = true;
+            
+            priceIncreaseInput.value = 5;
+            priceIncreaseVal.innerText = "5%";
+            
+            returnReductionInput.value = 2.0;
+            returnReductionVal.innerText = "-2.0%";
+            
+            bundleShiftInput.value = 10;
+            bundleShiftVal.innerText = "10%";
+
+            [controls1, controls2, controls3].forEach(el => {
+                el.style.opacity = '1';
+                el.style.pointerEvents = 'auto';
+            });
+
+            calculateProjectedProfit();
+        });
+
+        calculateProjectedProfit();
+    </script>
+</body>
+</html>
